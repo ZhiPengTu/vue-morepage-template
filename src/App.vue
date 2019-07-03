@@ -2,7 +2,7 @@
     <div id="app">
         <!-- <img src="./images/logo.png" alt="logo" /> -->
         <span>{{msg}}</span>
-        <p class="test">test text</p>
+        <p class="test">test tsssext</p>
     </div>
 </template>
 <script>
