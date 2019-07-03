@@ -1,0 +1,37 @@
+{
+  "name": "vue-morepage-template",
+  "version": "0.0.1",
+  "description": "vue-woyihome-template",
+  "main": "main.js",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --progress --config webpack.config.js",
+    "build": "webpack --mode=production --progress --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "zhipengTu",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "vue": "^2.6.10",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^2.0.1",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
