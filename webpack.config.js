@@ -1,17 +1,42 @@
 var path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugn = require("html-webpack-plugin");
+const utils =require("./config/utils");
+const testEntries =utils.getMultiEntries(resolve('src/views/home/*.js'));
 var webpack = require('webpack');
+
+console.log(testEntries)
+
+function resolve(dir){
+    return path.join(__dirname,'..',dir)
+}
 
 module.exports = {
     entry: './src/main.js', // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
     output: {
         path: path.resolve(__dirname, './dist'), // 项目的打包文件路径
-        publicPath: '/dist/', // 通过devServer访问路径
+        publicPath: '../dist/', // 通过devServer访问路径
         filename: "js/[name].js",
     },
     plugins: [
         // make sure to include the plugin for the magic
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugn({
+            filename:"index.html",
+            template:'./index.html',
+            minify:{
+                removeComments:true,
+                collapseWhitespace:false,
+                removeRedundantAttributes:true,
+                useShortDoctype:true,
+                removeEmptyAttributes:true,
+                removeStyleLinkTypeAttributes:true,
+                keepClosingSlash:true,
+                minifyCSS:true,
+                minifyJS:true,
+                minifyURLs:true,
+            }
+        })
     ],
     module: {
         rules: [
