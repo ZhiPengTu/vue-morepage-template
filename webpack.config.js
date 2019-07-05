@@ -2,17 +2,20 @@ var path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugn = require("html-webpack-plugin");
 const utils =require("./config/utils");
-const testEntries =utils.getMultiEntries(resolve('src/views/home/*.js'));
+const testEntries =utils.getMultiEntries(resolve('src/views/**/*.js'));
 var webpack = require('webpack');
 
-console.log(testEntries)
 
+console.log(testEntries)
 function resolve(dir){
-    return path.join(__dirname,'..',dir)
+    return path.join(path.resolve(__dirname),'./',dir)
 }
 
 module.exports = {
-    entry: './src/main.js', // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
+    // entry: {
+    //     "main": './src/main.js'
+    // }, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
+    entry: testEntries, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
     output: {
         path: path.resolve(__dirname, './dist'), // 项目的打包文件路径
         publicPath: '../dist/', // 通过devServer访问路径
