@@ -1,46 +1,49 @@
 var path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugn = require("html-webpack-plugin");
-const utils =require("./config/utils");
-const testEntries =utils.getMultiEntries(resolve('src/views/**/*.js'));
+const autoprefixer=require("autoprefixer");
+const utils = require("./config/utils");
+const entriesAndOutObj = utils.getMultiEntries(resolve('src/views/**/*.js'));
 var webpack = require('webpack');
 
-
-console.log(testEntries)
-function resolve(dir){
-    return path.join(path.resolve(__dirname),'./',dir)
+// var htmls = utils.getcreateMultiHtml();
+// console.log(htmls)
+// console.log(testEntries)
+console.log(autoprefixer)
+function resolve(dir) {
+    return path.join(path.resolve(__dirname), './', dir)
 }
-
+var plugins=[new VueLoaderPlugin()]
+plugins.push(...entriesAndOutObj.output);
 module.exports = {
+    mode:"production",
     // entry: {
     //     "main": './src/main.js'
     // }, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
-    entry: testEntries, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
+    entry: entriesAndOutObj.entries, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
     output: {
         path: path.resolve(__dirname, './dist'), // 项目的打包文件路径
-        publicPath: '../dist/', // 通过devServer访问路径
+        publicPath: '/dist/', // 通过devServer访问路径
         filename: "js/[name].js",
+        chunkFilename:"./js/[name].js"
     },
-    plugins: [
-        // make sure to include the plugin for the magic
-        new VueLoaderPlugin(),
-        new HtmlWebpackPlugn({
-            filename:"index.html",
-            template:'./index.html',
-            minify:{
-                removeComments:true,
-                collapseWhitespace:false,
-                removeRedundantAttributes:true,
-                useShortDoctype:true,
-                removeEmptyAttributes:true,
-                removeStyleLinkTypeAttributes:true,
-                keepClosingSlash:true,
-                minifyCSS:true,
-                minifyJS:true,
-                minifyURLs:true,
+    plugins:plugins,
+    optimization: {
+        runtimeChunk:{
+            name:"manifest"
+        },
+        splitChunks: {
+            chunks:"async",
+            minSize:500,
+            minChunks:2,
+            cacheGroups: {
+                commons: {
+                    name: "commons",
+                    chunks: "initial"
+                },
+
             }
-        })
-    ],
+        }
+    },
     module: {
         rules: [
             {
@@ -54,6 +57,18 @@ module.exports = {
                     'style-loader',
                     'css-loader',
                     // 'postcss-loader'
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                require('autoprefixer')({
+                                    browsers: ['iOS >= 7', 'Android >= 4.1']
+                                }),
+                                require('postcss-px2rem')({ remUnit: 75 })
+                            ]
+                        }
+                    }
                 ]
 
                 //依次使用以上loader加载css文件，postcss-loader可以暂时不加，后面再深入修改webpack配置的时候再说用处

@@ -4,19 +4,18 @@
         <span>{{msg}}</span>
         <p class="test">test tsss</p>
         <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
-        <p class="test">test tsss</p>
+        <span>home</span>
+      
     </div>
 </template>
 <script>
 import Vue from "vue";
+
 export default {
   name: "app",
+  components:{
+
+  },
   data() {
     return {
       msg: "hello vue ssss!!"
