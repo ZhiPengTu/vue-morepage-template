@@ -22,7 +22,7 @@ exports.getMultiEntries=function(globPath){
         // console.log(element.split('/'))
         // console.log(element.split('/').indexOf("src"))
         tmp=(element.split('/')).splice(element.split('/').indexOf("src")+1);
-        console.log((element.split('/')).splice(element.split('/').indexOf("src")+1));
+        // console.log((element.split('/')).splice(element.split('/').indexOf("src")+1));
         // pathname=(tmp.splice(0,tmp.length-1)).join("/");
         // console.log(pathname)
         entries[tmp[1]] = element;

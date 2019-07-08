@@ -4,15 +4,20 @@ const autoprefixer=require("autoprefixer");
 const utils = require("./config/utils");
 const entriesAndOutObj = utils.getMultiEntries(resolve('src/views/**/*.js'));
 var webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // var htmls = utils.getcreateMultiHtml();
 // console.log(htmls)
 // console.log(testEntries)
-console.log(autoprefixer)
 function resolve(dir) {
     return path.join(path.resolve(__dirname), './', dir)
 }
-var plugins=[new VueLoaderPlugin()]
+var plugins = [new VueLoaderPlugin(), new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: "css/[name].css",
+    chunkFilename: "[name].css"
+})]
 plugins.push(...entriesAndOutObj.output);
 module.exports = {
     mode:"production",
@@ -22,10 +27,12 @@ module.exports = {
     entry: entriesAndOutObj.entries, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
     output: {
         path: path.resolve(__dirname, './dist'), // 项目的打包文件路径
-        publicPath: '/dist/', // 通过devServer访问路径
+        publicPath: '../dist/', // 通过devServer访问路径
         filename: "js/[name].js",
+        globalObject: 'this',
         chunkFilename:"./js/[name].js"
     },
+    
     plugins:plugins,
     optimization: {
         runtimeChunk:{
@@ -54,17 +61,22 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // you can specify a publicPath here
+                            // by default it use publicPath in webpackOptions.output
+                            // publicPath: '../'
+                        }
+                    },
+                    // 'style-loader',
                     'css-loader',
-                    // 'postcss-loader'
                     {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
                             plugins: [
-                                require('autoprefixer')({
-                                    browsers: ['iOS >= 7', 'Android >= 4.1']
-                                }),
+                                require('autoprefixer')("last 2 versions"),//浏览器器兼容 自动加前缀
                                 require('postcss-px2rem')({ remUnit: 75 })
                             ]
                         }
