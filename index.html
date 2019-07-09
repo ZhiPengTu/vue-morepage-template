@@ -3,20 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>我易家</title>
+    <script src="https://jic.talkingdata.com/app/h5/v1?appid=0F8795BA504F4C3EACB9074DB4C49B58&vn=我易家H5测试&vc=1.0.0"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script>document.getElementsByTagName('html')[0].style.fontSize = (document.documentElement.clientWidth || document.body.clientWidth) / 10 + 'px';</script>
     <style>
-            #id{
-                display: flex;
-                flex-direction: column;
-            }
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            </style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        html,
+        body {
+            /* -ms-overflow-style: scrollbar; */
+            -webkit-tap-highlight-color: transparent;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body::before {
+            content: "1";
+            height: 1px;
+            overflow: hidden;
+            color: transparent;
+            display: block;
+        }
+    </style>
 
 </head>
 
@@ -24,5 +45,16 @@
     <div id="app">
     </div>
 </body>
-
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('input').on('blur', function () {
+                $(window).scrollTop(0);
+            });
+            $('textarea').on('blur', function () {
+                $(window).scrollTop(0);
+            });
+        }, 1000)
+    });
+</script>
 </html>

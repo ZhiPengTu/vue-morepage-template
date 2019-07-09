@@ -7,6 +7,7 @@
         <hello></hello>
         <div class="flex-wrap-row">
           <div class="flex-item">ss</div>
+          <div class="flex-item flex-seft">ss</div>
           <div class="flex-item">ss</div>
         </div>
         <div class="flex-wrap-column">
@@ -38,38 +39,37 @@ export default {
   }
 };
 </script>
-<style>
+<style scope>
 .test {
   color: #020202;
 }
-.flex-wrap-row{
-  width: 750px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
-  flex-direction: row;
-}
+
 .flex-wrap-column{
-  display: flex;
+  /* display: flex; */
   width: 750px;
   height: 100px;
   flex-direction: column;
   align-items: center;
-   justify-content: center;
+  justify-content: center;
+}
+.flex-wrap-row{
+  width: 750px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: yellowgreen;
+  height: 200px;
+}
+.flex-seft{
+  align-self:flex-end;
 }
 .flex-item{
-  display: flex;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   margin:0;
   font-size: 30px;
-  background: yellow;
+  background: red;
+}
 
-}
-#app {
-}
-img {
-  width: 100px;
-}
 </style>

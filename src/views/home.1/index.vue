@@ -9,7 +9,7 @@
 </template>
 <script>
 // import Vue from "vue";
-
+import "@/asset/css/cascade.css";
 export default {
   name: "app",
   components:{

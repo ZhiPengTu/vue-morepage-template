@@ -15,8 +15,7 @@ exports.getMultiEntries=function(globPath){
     // console.log(globPath);
     
     // console.log(glob.sync(globPath))
-    glob.sync(globPath).forEach(element => {
-       
+    glob.sync(globPath).forEach((element,index) => {
         basename=path.basename(element,path.extname(element))
 
         // console.log(element.split('/'))
@@ -32,7 +31,7 @@ exports.getMultiEntries=function(globPath){
             filename:`${tmp[1]}.html`,
             template: './index.html',
             title:tmp[1],
-            chunks:[tmp[1],'manifest', 'vendor',"commons"],
+            chunks: [tmp[1], 'manifest',"styles", 'vendor',"commons"],
             inject: true,
             minify: {
                 removeComments: true,
@@ -49,7 +48,8 @@ exports.getMultiEntries=function(globPath){
         };
         output.push(new HtmlWebpackPlugn(conf));
     });
-    entriesAndOutputObj.entries=entries;
+    entriesAndOutputObj.entries = entries;
+    console.log(Object.keys(entriesAndOutputObj.entries))
     entriesAndOutputObj.output=output;
     return entriesAndOutputObj;
 };

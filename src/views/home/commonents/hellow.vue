@@ -16,7 +16,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scope>
 .wrap{
     width:750px;
     height: 200px;

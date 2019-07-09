@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-
+import "@/asset/css/cascade.css";
 export default {
   name: "hellow ",
   data() {
@@ -20,6 +20,9 @@ export default {
 .wrap{
     width:750px;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: red;
 }
 </style>
