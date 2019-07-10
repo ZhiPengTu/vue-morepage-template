@@ -21,11 +21,13 @@
         <div class="flex-wrap-column">
           <div class="flex-item">ss</div>
           <div class="flex-item">ss</div>
+          <div class="flex-item">ss</div>
+          <div class="flex-item">ss</div>
+          <div class="flex-item">ss</div>
         </div>
     </div>
 </template>
 <script>
-// import Vue from "vue";
 import hello from "./commonents/hellow"
 export default {
   name: "app",

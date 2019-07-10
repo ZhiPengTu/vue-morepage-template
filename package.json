@@ -4,7 +4,7 @@
   "description": "vue-woyihome-template",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config webpack.config.js",
+    "dev": "webpack-dev-server --env.NODE_ENV=dev --inline --progress",
     "build": "webpack --env.NODE_ENV=production --progress --hide-modules"
   },
   "repository": {

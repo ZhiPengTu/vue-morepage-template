@@ -1,10 +1,8 @@
 import Vue from "vue";
-import App from './index.vue'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
+import App from './index.vue';
+
 new Vue({
   el:"#app",
   template:'<App/>',
   components:{App}
-})
+});

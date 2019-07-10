@@ -5,20 +5,22 @@ module.exports = env => {
         case 'production':
             webpackConfig = require('./config/webpack.prod.conf.js');
             break;
-      
+
         case 'testing':
-            webpackConfig = require('./configs/webpack.test.conf');
+            webpackConfig = require('./config/webpack.test.conf.js');
             break;
         case 'common':
-            webpackConfig = require('./configs/webpack.common.conf');
+            webpackConfig = require('./config/webpack.common.conf.js');
             break;
         case 'release':
-            webpackConfig = require('./configs/webpack.release.conf');
+            webpackConfig = require('./config/webpack.release.conf.js');
             break;
         case 'dev':
+            webpackConfig = require('./config/webpack.dev.conf.js');
+            break;
         case 'development':
         default:
-            webpackConfig = require('./configs/webpack.dev.conf');
+            webpackConfig = require('./config/webpack.dev.conf.js');
     }
     return webpackConfig;
 }
