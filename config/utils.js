@@ -12,7 +12,7 @@ exports.getMultiEntries=function(globPath){
     basename,
     tmp,
     pathname;
-    // console.log(globPath);
+    console.log(globPath);
     
     // console.log(glob.sync(globPath))
     glob.sync(globPath).forEach((element,index) => {
@@ -35,14 +35,14 @@ exports.getMultiEntries=function(globPath){
             inject: true,
             minify: {
                 removeComments: true,
-                collapseWhitespace: false,
+                collapseWhitespace: true,
                 removeRedundantAttributes: true,
                 useShortDoctype: true,
                 removeEmptyAttributes: true,
                 removeStyleLinkTypeAttributes: true,
                 keepClosingSlash: true,
                 minifyCSS: true,
-                minifyJS: false,
+                minifyJS: true,
                 minifyURLs: true,
             }
         };
