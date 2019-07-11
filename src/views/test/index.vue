@@ -20,6 +20,9 @@
         </div>
         <div class="flex-wrap-column">
           <div class="flex-item">ss</div>
+          <div class="flex-item">ssdfsdfasdfasfdsafds</div>
+          <div class="flex-item">ss</div>
+          <div class="flex-item">ss</div>
           <div class="flex-item">ss</div>
           <div class="flex-item">ss</div>
           <div class="flex-item">ss</div>
