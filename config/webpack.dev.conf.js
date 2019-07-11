@@ -5,9 +5,15 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const utils = require("./utils.js");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const entriesAndOutObj = utils.getMultiEntries(resolve('../src/views/**/*.js'));
-// var webpack = require('webpack');
+var webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-console.log(CleanWebpackPlugin)
+
+
+const config = require('./config');
+
+
+
 function resolve(dir) {
     return path.join(path.resolve(__dirname), './', dir)
 }
@@ -19,32 +25,81 @@ var plugins = [
     // Options similar to the same options in webpackOptions.output
     // both options are optional
     filename: "css/[name].[hash].css",
-    chunkFilename: "./css/[name].[hash].css"
-})];
+    chunkFilename: "../css/[name].[hash].css"
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //     compress: {
+    //         warnings: false,
+    //         drop_debugger: true,
+    //         drop_console: true
+    //     },
+    //     sourceMap: true
+    // })
+];
 
 plugins.push(...entriesAndOutObj.output);
 module.exports = {
-    mode: "production",
+    mode: "development",
+    // devtool: 'inline-source-map',
     entry: entriesAndOutObj.entries, // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
     output: {
         path: path.resolve(__dirname, '../', './dist'), // 项目的打包文件路径
-        publicPath: '/dist', // 通过devServer访问路径
+        publicPath: 'dist', // 通过devServer访问路径
         filename: "js/[name].[hash].js",
         globalObject: 'this',
-        chunkFilename: "./js/[name].[hash].js"
+        chunkFilename: "../js/[name].[hash].js"
+    },
+    devServer: {
+        historyApiFallback: false,
+        // stats: 'errors-only',
+         //设置基本目录结构,用于找到程序打包地址
+        // contentBase: path.join(__dirname, 'dist'),
+        //服务器的IP地址，可以使用IP也可以使用localhost
+        host: config.dev.host,
+        //在所有响应中添加首部内容
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        },
+        // public:"",
+        open: true,
+        //服务端压缩是否开启
+        //compress:true,
+        //绕过主机检查
+        disableHostCheck: true,
+        //网络广播服务器
+        // openPage: encodeURI(openPage),
+        openPage: encodeURI("dist/test.html"),
+        //bonjour: true,
+        //此选项允许浏览器使用您的本地IP打开
+        useLocalIp: false,
+        //配置服务端口号
+        port: 8081,
+        //是否开启热重载
+        hot: true
     },
     plugins: plugins,
     optimization: {
         runtimeChunk: {
             name: "manifest"
         },
+        removeEmptyChunks: false,
         minimizer: [
-            // new UglifyJsPlugin({
+            new UglifyJsPlugin({
+               
+                cache: true,
+                parallel: true,
+                sourceMap: true
+            }),
+            // new TerserPlugin({
             //     cache: true,
             //     parallel: true,
-            //     sourceMap: true
+            //     sourceMap: true, // Must be set to true if using source-maps in production
+            //     terserOptions: {
+            //         // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+            //     }
             // }),
-            // new OptimizeCSSAssetsPlugin()
+            new OptimizeCSSAssetsPlugin()
         ],
         splitChunks: {
             chunks: "async",
@@ -152,9 +207,6 @@ module.exports = {
             //用@直接指引到src目录下，如：'./src/main'可以写成、'@/main'
             '@': path.resolve(__dirname,'../', './src'),
         }
-    },
-    devServer: {
-        historyApiFallback: false, //historyApiFallback设置为true那么所有的路径都执行index.html。
-        overlay: true // 将错误显示在html之上
     }
+   
 };

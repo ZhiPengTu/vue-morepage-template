@@ -38,6 +38,7 @@ module.exports = {
         runtimeChunk: {
             name: "manifest"
         },
+        removeEmptyChunks: true,
         minimizer: [
             new UglifyJsPlugin({
                 cache: true,
@@ -47,8 +48,8 @@ module.exports = {
             new OptimizeCSSAssetsPlugin()
         ],
         splitChunks: {
-            chunks: "async",
-            // chunks:"all",
+            // chunks: "async",
+            chunks:"all",
             minSize: 100,
             minChunks: 2,
             name: true,

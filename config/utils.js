@@ -12,21 +12,10 @@ exports.getMultiEntries=function(globPath){
     basename,
     tmp,
     pathname;
-    console.log(globPath);
-    
-    // console.log(glob.sync(globPath))
     glob.sync(globPath).forEach((element,index) => {
         basename=path.basename(element,path.extname(element))
-
-        // console.log(element.split('/'))
-        // console.log(element.split('/').indexOf("src"))
         tmp=(element.split('/')).splice(element.split('/').indexOf("src")+1);
-        // console.log((element.split('/')).splice(element.split('/').indexOf("src")+1));
-        // pathname=(tmp.splice(0,tmp.length-1)).join("/");
-        // console.log(pathname)
         entries[tmp[1]] = element;
-
-
         var conf={
             filename:`${tmp[1]}.html`,
             template: './index.html',
@@ -49,7 +38,7 @@ exports.getMultiEntries=function(globPath){
         output.push(new HtmlWebpackPlugn(conf));
     });
     entriesAndOutputObj.entries = entries;
-    console.log(Object.keys(entriesAndOutputObj.entries))
+    // console.log(Object.keys(entriesAndOutputObj.entries))
     entriesAndOutputObj.output=output;
     return entriesAndOutputObj;
 };

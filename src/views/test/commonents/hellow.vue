@@ -2,7 +2,8 @@
     <div class="wrap">
         <!-- <img src="./images/logo.png" alt="logo" /> -->
        
-        <span>commonents</span>
+        <span>commonsdsdfsdfents</span>
+        <span>{{msg}}</span>
     </div>
 </template>
 <script>
@@ -11,7 +12,7 @@ export default {
   name: "hellow ",
   data() {
     return {
-      msg: "hello vue ssss!!"
+      msg: "hello vsdfsdfasdfasdfsaue ssss!!"
     };
   }
 };
