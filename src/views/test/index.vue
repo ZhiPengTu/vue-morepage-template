@@ -4,7 +4,7 @@
         <span>{{msg}}</span>
         <p class="test">test tsss</p>
         <p class="test">test</p>
-        <hello></hello>
+        <hellow></hellow>
         <div class="flex-wrap-row">
           <div class="flex-item">ss</div>
           <div class="flex-item flex-seft">ss</div>
@@ -31,11 +31,11 @@
     </div>
 </template>
 <script>
-import hello from "./commonents/hellow"
+import hellow from "./commonents/hellow"
 export default {
   name: "app",
   components:{
-    hello
+    hellow
   },
   data() {
     return {

@@ -9,7 +9,7 @@
 <script>
 import "@/asset/css/cascade.css";
 export default {
-  name: "hellow ",
+  name: "hellow",
   data() {
     return {
       msg: "hello vsdfsdfasdfasdfsaue ssss!!"
